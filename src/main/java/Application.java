@@ -1,46 +1,44 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Application extends JFrame {
-    public static final int PREF_W = 600;
-    public static final int PREF_H = 300;
+    Mediator mediator = new Mediator();
 
-    private FieldPanel field;
-    private MenuPanel menu;
+    BoardPanel boardPanel;
+    MenuPanel menuPanel;
     public Application() {
-
         setConfig();
-    }
 
-    /***
-     * Set configs of the field.
-     */
-    private void setConfig() {
-        setSize(new Dimension(PREF_W, PREF_H));
-        field = new FieldPanel();
-        menu = new MenuPanel(this);
-        field.add(menu, BorderLayout.EAST);
-
-        this.getContentPane().add(field);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        initElements();
 
         setVisible(true);
     }
 
-    /***
-     * Add an object to the field.
-     * @param object
-     */
-    public void addObject(String object) {
-        System.out.println(object);
+    private void setConfig() {
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice screen = env.getDefaultScreenDevice();
+        GraphicsConfiguration config = screen.getDefaultConfiguration();
 
-        if (object.equals("POINT")) {
-            field.addPoint();
-        } else if (object.equals("TRIANGLE")) {
-            field.addTriangle();
-        }
+        int screenHeight = config.getBounds().height;
+        int screenWidth = config.getBounds().width;
 
+        setLayout(new BorderLayout());
+        setSize(new Dimension(screenWidth, screenHeight));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+        setTitle("Helpometrika");
+    }
+
+    private void initElements() {
+
+        boardPanel = new BoardPanel(mediator);
+        getContentPane().add(boardPanel, BorderLayout.CENTER);
+
+        menuPanel = new MenuPanel(mediator);
+        getContentPane().add(menuPanel, BorderLayout.EAST);
+    }
+
+    public static void main(String[] args) {
+        new Application();
     }
 }

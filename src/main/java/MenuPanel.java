@@ -4,34 +4,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuPanel extends JPanel implements ActionListener {
-    private JButton newTriangle;
-    private JButton newPoint;
-    private Application _parent;
+    private final Mediator mediator;
 
-    public MenuPanel(Application parent) {
-        _parent = parent;
+    MenuPanel(Mediator mediator) {
+        this.mediator = mediator;
+
         setConfig();
+
+        initElements();
+    }
+    private void setConfig() {
+        setPreferredSize(new Dimension(300, 300));
+        setBackground(new Color(121, 53, 53));
     }
 
-    private void setConfig() {
-        setLayout(new FlowLayout());
-        this.setBackground(new Color(40, 56, 61));
-        this.setPreferredSize(new Dimension(Application.PREF_W/2, Application.PREF_H));
-
-        newTriangle = new JButton("+ TRIANGLE");
-        newTriangle.addActionListener(this);
-        add(newTriangle);
-        newPoint = new JButton("+ POINT");
-        newPoint.addActionListener(this);
-        add(newPoint);
-
+    private void initElements() {
+        add(new JButtonPoint(this, mediator));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        if (command.startsWith("+")) {
-            _parent.addObject(command.substring(2));
+        if (e.getSource() instanceof Command) {
+            Command c = (Command)e.getSource();
+            c.execute();
         }
     }
 }

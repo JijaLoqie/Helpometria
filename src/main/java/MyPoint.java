@@ -1,20 +1,16 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Point2D;
 
-public class MyPoint extends JPanel {
-    private Point2D.Float _point;
+public class MyPoint implements Shape {
+    static public int size;
     public MyPoint() {
-        _point = new Point2D.Float(0, 0);
+        size = 20;
     }
-
-
+    public MyPoint(int _size) {
+        size = _size;
+    }
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D graph2 = (Graphics2D) g;
-        graph2.setPaint(Color.BLUE);
-        graph2.fillOval((int) _point.x, (int) _point.y, 10, 10);
-        repaint();
+    public void draw(Graphics g, int x, int y, Color color) {
+        g.setColor(color);
+        g.fillOval(x, y, size, size);
     }
 }
