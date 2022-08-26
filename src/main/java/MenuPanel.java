@@ -20,6 +20,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 
     private void initElements() {
         add(new JButtonPoint(this, mediator));
+        add(new DragButton(this, mediator));
     }
 
     @Override

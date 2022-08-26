@@ -14,7 +14,7 @@ public class JButtonPoint extends JButton implements Command{
     }
     @Override
     public void execute() {
-        mediator.setDrawable("Point");
+        mediator.switchDrawable("Point");
     }
 
 }
