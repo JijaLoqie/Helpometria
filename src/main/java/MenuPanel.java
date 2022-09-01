@@ -19,14 +19,14 @@ public class MenuPanel extends JPanel implements ActionListener {
     }
 
     private void initElements() {
-        add(new JButtonPoint(this, mediator));
-        add(new DragButton(this, mediator));
+        add(new ButtonCommand("Point", this, mediator));
+        add(new ButtonCommand("Drag", this, mediator));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof Command) {
-            Command c = (Command)e.getSource();
+        if (e.getSource() instanceof ButtonCommand) {
+            ButtonCommand c = (ButtonCommand)e.getSource();
             c.execute();
         }
     }

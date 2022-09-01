@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Application extends JFrame {
-    Mediator mediator = new Mediator();
+    Mediator mediator;
 
     BoardPanel boardPanel;
     MenuPanel menuPanel;
@@ -30,11 +30,11 @@ public class Application extends JFrame {
     }
 
     private void initElements() {
-
-        boardPanel = new BoardPanel(mediator);
+        mediator = Mediator.createInstance();
+        boardPanel = mediator.getBoard();
         getContentPane().add(boardPanel, BorderLayout.CENTER);
 
-        menuPanel = new MenuPanel(mediator);
+        menuPanel = mediator.getMenu();
         getContentPane().add(menuPanel, BorderLayout.EAST);
     }
 
