@@ -2,6 +2,7 @@ import java.awt.*;
 
 public abstract class FigureManager {
     protected boolean drawable = false;
+    protected boolean isPartOfLine = false;
     protected boolean dragable = false;
     BoardPanel boardPanel;
     FigureManager(BoardPanel boardPanel) {
@@ -23,4 +24,8 @@ public abstract class FigureManager {
 
     abstract public void draw(float x, float y);
     abstract public void draw(float x, float y, Color color);
+
+    public boolean isPartOfLine() {
+        return isPartOfLine;
+    }
 }

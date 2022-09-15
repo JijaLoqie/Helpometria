@@ -67,6 +67,10 @@ public class Mediator {
         FigureManager figure = abstractFigureManager.getFigureManager("Point");
         if (figure.isDrawable()) {
             figure.draw(pressPoint.x, pressPoint.y);
+            BoardPanel.points.add(pressPoint);
+            if (figure.isPartOfLine()) { // TODO: add point grapper
+                prevPoint = pressPoint;
+            }
         } else if (figure.isDragable()) {
             prevPoint = pressPoint;
         } else {
@@ -74,4 +78,7 @@ public class Mediator {
         }
     }
 
+    public void handleRelease(Point releasePoint) {
+        FigureManager figure = abstractFigureManager.getFigureManager("Point");
+    }
 }
