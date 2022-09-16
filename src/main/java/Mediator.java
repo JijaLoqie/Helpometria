@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class Mediator {
-    static private AbstractFigureManager abstractFigureManager;
+    public FigureManager figureManager;
     private BoardPanel board;
     private MenuPanel menu;
     HashMap<String, ButtonCommand> buttons = new HashMap<>();
@@ -16,7 +16,6 @@ public class Mediator {
         Mediator mediator = new Mediator();
         mediator.initBoard();
         mediator.initMenu();
-        abstractFigureManager = new AbstractFigureManager(mediator.board);
         return mediator;
     }
 
@@ -26,6 +25,7 @@ public class Mediator {
 
     public void initBoard() {
         this.board = new BoardPanel(this);
+        this.figureManager = new FigureManager(board);
     }
 
     public void initButton(ButtonCommand button) {
@@ -34,16 +34,14 @@ public class Mediator {
 
 
     public void pressButton(String type) throws Exception {
-        FigureManager figure = abstractFigureManager.getFigureManager(type);
-        if (figure != null) {
-            figure.setDrawable(!figure.isDrawable());
-            figure.setDragable(false);
-            abstractFigureManager.noDrawableExcept(type);
+        if (type.equals("Point")) {
+            figureManager.changeStatus(Status.DRAW);
         } else if (type.equals("Drag")) {
-            abstractFigureManager.setAllDragable();
-            abstractFigureManager.noDrawable();
+            figureManager.changeStatus(Status.DRAG);
+        } else if (type.equals("Line")) {
+            figureManager.changeStatus(Status.LINE);
         } else {
-            throw new Exception("Unknown figure");
+            throw new Exception("Unknown Action");
         }
         for (String buttonType : buttons.keySet()) {
             if (buttonType.equals(type)) {
@@ -64,14 +62,12 @@ public class Mediator {
     }
 
     public void handlePress(Point pressPoint) {
-        FigureManager figure = abstractFigureManager.getFigureManager("Point");
-        if (figure.isDrawable()) {
-            figure.draw(pressPoint.x, pressPoint.y);
-            BoardPanel.points.add(pressPoint);
-            if (figure.isPartOfLine()) { // TODO: add point grapper
+        if (figureManager.isDrawable()) {
+            figureManager.draw(new DPoint(figureManager, pressPoint));
+            if (figureManager.isPartOfLine()) { //?
                 prevPoint = pressPoint;
             }
-        } else if (figure.isDragable()) {
+        } else if (figureManager.isDragable()) { //?
             prevPoint = pressPoint;
         } else {
             System.out.println("Can't do it :(");
@@ -79,6 +75,6 @@ public class Mediator {
     }
 
     public void handleRelease(Point releasePoint) {
-        FigureManager figure = abstractFigureManager.getFigureManager("Point");
+        //?
     }
 }

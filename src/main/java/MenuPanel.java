@@ -21,6 +21,7 @@ public class MenuPanel extends JPanel implements ActionListener {
     private void initElements() {
         add(new ButtonCommand("Point", this, mediator));
         add(new ButtonCommand("Drag", this, mediator));
+        add(new ButtonCommand("Line", this, mediator));
     }
 
     @Override

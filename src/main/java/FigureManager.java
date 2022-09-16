@@ -1,31 +1,38 @@
 import java.awt.*;
+import java.util.HashSet;
 
-public abstract class FigureManager {
-    protected boolean drawable = false;
-    protected boolean isPartOfLine = false;
-    protected boolean dragable = false;
-    BoardPanel boardPanel;
+public class FigureManager {
+    Status status = Status.NOTHING;
+    HashSet<DPoint> dpoints = new HashSet<>();
+    HashSet<DLine> dlines = new HashSet<>();
+    public BoardPanel boardPanel;
     FigureManager(BoardPanel boardPanel) {
         this.boardPanel = boardPanel;
     }
     public boolean isDrawable() {
-        return drawable;
+        return status.equals(Status.DRAW);
     }
     public boolean isDragable() {
-        return dragable;
+        return status.equals(Status.DRAG);
     }
-
-    public void setDrawable(boolean drawable) {
-        this.drawable = drawable;
-    }
-    public void setDragable(boolean dragable) {
-        this.dragable = dragable;
-    }
-
-    abstract public void draw(float x, float y);
-    abstract public void draw(float x, float y, Color color);
-
     public boolean isPartOfLine() {
-        return isPartOfLine;
+        return status.equals(Status.LINE);
+    }
+
+    public void changeStatus(Status newStatus) {
+        if (newStatus.equals(status)) {
+            status = Status.NOTHING;
+        } else {
+            status = newStatus;
+        }
+    }
+
+    public void draw(DPoint dpoint) {
+        dpoints.add(dpoint);
+        boardPanel.add(dpoint);
+        dpoint.repaint();
+    }
+    public void draw(DLine dline) {
+        dline.paintLine();
     }
 }
