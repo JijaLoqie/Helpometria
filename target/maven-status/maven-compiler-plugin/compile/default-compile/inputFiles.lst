@@ -1,9 +1,10 @@
-C:\Users\dima\Desktop\Helpometria\src\main\java\DragButton.java
-C:\Users\dima\Desktop\Helpometria\src\main\java\ShapeManager.java
 C:\Users\dima\Desktop\Helpometria\src\main\java\BoardPanel.java
-C:\Users\dima\Desktop\Helpometria\src\main\java\JButtonPoint.java
+C:\Users\dima\Desktop\Helpometria\src\main\java\DFigure.java
+C:\Users\dima\Desktop\Helpometria\src\main\java\DLine.java
+C:\Users\dima\Desktop\Helpometria\src\main\java\FigureManager.java
 C:\Users\dima\Desktop\Helpometria\src\main\java\Application.java
-C:\Users\dima\Desktop\Helpometria\src\main\java\MyPoint.java
+C:\Users\dima\Desktop\Helpometria\src\main\java\DPoint.java
 C:\Users\dima\Desktop\Helpometria\src\main\java\MenuPanel.java
 C:\Users\dima\Desktop\Helpometria\src\main\java\Mediator.java
-C:\Users\dima\Desktop\Helpometria\src\main\java\Command.java
+C:\Users\dima\Desktop\Helpometria\src\main\java\Status.java
+C:\Users\dima\Desktop\Helpometria\src\main\java\ButtonCommand.java

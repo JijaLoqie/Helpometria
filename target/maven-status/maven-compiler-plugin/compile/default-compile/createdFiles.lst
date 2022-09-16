@@ -1,10 +1,5 @@
 Mediator.class
 MenuPanel.class
-MyPoint.class
-DragButton.class
-JButtonPoint.class
-ShapeManager.class
 BoardPanel$DragListener.class
 BoardPanel.class
-Command.class
 Application.class
